@@ -1,0 +1,27 @@
+2014-04-21T20:56:34.748319000 0.003644s info: Creating directory /Users/aries/Workspace/thinker/rethinkdb_data
+2014-04-21T20:56:34.752672000 0.007998s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/aries/Workspace/thinker/rethinkdb_data' did not already exist.)
+2014-04-21T20:56:34.753100000 0.008425s info: Running rethinkdb 1.12.3 (CLANG 5.1 (clang-503.0.40))...
+2014-04-21T20:56:34.758240000 0.013565s info: Running on Darwin 13.1.0 x86_64
+2014-04-21T20:56:34.758297000 0.013622s info: Using cache size of 100 MB
+2014-04-21T20:56:34.758326000 0.013651s warn: Cache size does not leave much memory for server and query overhead (available memory: 1008 MB).
+2014-04-21T20:56:34.758346000 0.013671s warn: Cache size is very low and may impact performance.
+2014-04-21T20:56:34.758362000 0.013687s info: Loading data from directory /Users/aries/Workspace/thinker/rethinkdb_data
+2014-04-21T20:56:34.883871000 0.139197s info: Listening for intracluster connections on port 29015
+2014-04-21T20:56:34.892034000 0.147359s info: Listening for client driver connections on port 28015
+2014-04-21T20:56:34.892154000 0.147479s info: Listening for administrative HTTP connections on port 8080
+2014-04-21T20:56:34.892173000 0.147498s info: Listening on addresses: 127.0.0.1, ::1
+2014-04-21T20:56:34.892174000 0.147499s info: To fully expose RethinkDB on the network, bind to all addresses
+2014-04-21T20:56:34.892192000 0.147517s info: by running rethinkdb with the `--bind all` command line option.
+2014-04-21T20:56:34.892257000 0.147582s info: Server ready
+2014-04-22T01:57:34.435158000 17844.158245s info: Applying data {"databases":{"f5752ca6-2502-454a-a23a-cdeb1fe774f6":null},"rdb_namespaces":{"694ef6e5-cffc-4958-8a62-17bc25ffb677":null,"0165c799-4a1c-40c9-ad66-1fe280b98706":null,"d43ad6e4-31b0-471d-bd15-9d8b5d738046":null}}
+2014-04-22T01:59:36.616216000 17966.316725s info: Applying data {"databases":{"e563a425-822a-4ca2-816b-fd1d15f45087":null},"rdb_namespaces":{"3ddad27a-b60e-4bb4-ab40-2812508da2a5":null,"8ea5ccd6-b4c9-4186-8074-f9e8c7ee9e9d":null,"de7f23f2-f85d-472d-90cd-79435fbafbb3":null}}
+2014-04-22T02:00:18.706954000 18008.399691s info: Applying data {"databases":{"4110cbe6-8250-411a-9bb5-e36516d8551e":null},"rdb_namespaces":{"36bae20b-b314-453e-9523-c3307438d353":null,"a287d703-14d2-4e07-b941-effd5bddb8a2":null,"f423c1da-4281-4270-95b2-a7691680d9e2":null}}
+2014-04-22T12:06:34.052492000 27893.665066s info: Applying data {"databases":{"7bdf094f-0a78-4a56-9676-c0bc340166a2":null},"rdb_namespaces":{"0e4b69aa-7575-4862-925f-3ae3e17e19d1":null,"24e62e82-fe84-473f-9660-fd4d2ec3814a":null,"bf6f1d33-a2da-46f5-988f-f52acd39c659":null}}
+2014-04-22T12:08:37.315019000 28016.905385s info: Applying data {"databases":{"3b92053b-473d-45b0-94ce-8cfaadecf60f":null},"rdb_namespaces":{"02b6c142-8674-4136-be84-d67216c283e0":null,"77ebb415-9e76-43a1-a3e2-41ac76871409":null,"fddf9f2d-3702-4bdf-94c6-9d6d8ada0257":null}}
+2014-04-22T12:11:34.623370000 28194.180423s info: Applying data {"databases":{"d90e230f-4d26-47cc-af21-ed1a239b038d":null},"rdb_namespaces":{"8671d90b-6038-44c0-bdd2-4d73656deb38":null,"c73382ed-deeb-4537-be02-2f20362a4fd0":null,"fab58ee7-89dd-4c9a-b940-bbed452939a4":null}}
+2014-04-22T12:36:14.573569000 29673.869673s info: Applying data {"databases":{"fd0fa746-1c74-4dad-8630-a599012aba54":null},"rdb_namespaces":{"2af2ea7f-f813-4b91-916c-7ab89cdd58ab":null,"31de4c95-74a0-4739-a320-ca92b37c0cb1":null,"7a9835c5-1aae-484a-b2d5-3b07254b1d10":null}}
+2014-04-22T12:41:07.123277000 29966.365709s info: Applying data {"databases":{"3e9ccd43-aaca-4c3a-820d-81d68a32eaa8":null},"rdb_namespaces":{"1fc3a009-1271-4421-8dfb-c478791ddb6c":null}}
+2014-04-22T19:39:18.444714000 52151.399256s info: Applying data {"databases":{"39aa929d-970c-4479-baad-24a0c11ee812":null},"rdb_namespaces":{"0f7bc6c3-cd7e-405b-9ecb-8d13870d05e9":null,"145ffc60-ec07-4c83-a783-9916d3ce35f3":null,"a72cdce5-3e43-44dc-99bb-654170eec820":null}}
+2014-04-22T19:48:52.769117000 52725.617428s info: Applying data {"databases":{"07aae243-e240-45bc-b360-71a6cbbc5ba5":null},"rdb_namespaces":{"afd0d72d-ec80-4247-9d1b-f56150d3baae":null,"5df2a227-5178-44f4-95ed-353413d30578":null,"ef88bb7f-0501-4974-b68e-e957c0da1b73":null}}
+2014-04-22T19:52:16.365760000 52929.176317s info: Applying data {"databases":{"ef37c13d-6772-4b09-b656-fa634851cb8f":null},"rdb_namespaces":{"08a4a7b1-46f8-4c4f-9e04-306fa44110b7":null,"6ef97ccf-fd57-4aab-b9f1-ea92060c77c3":null,"e5d56c7a-1385-44d7-af2e-c3cdc2c6b359":null}}
+2014-04-22T20:20:26.994986000 54619.492773s info: Applying data {"databases":{"b3df05d5-8750-4bc9-8d9c-477664008a72":null},"rdb_namespaces":{"6f543605-8384-4352-a020-c3480009a979":null,"d64285cf-3be3-4c70-89b9-0bb0e636d83f":null,"dd733c63-efdb-4f2e-a388-8ca0444aabe7":null}}
