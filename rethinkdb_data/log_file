@@ -25,3 +25,38 @@
 2014-04-22T19:48:52.769117000 52725.617428s info: Applying data {"databases":{"07aae243-e240-45bc-b360-71a6cbbc5ba5":null},"rdb_namespaces":{"afd0d72d-ec80-4247-9d1b-f56150d3baae":null,"5df2a227-5178-44f4-95ed-353413d30578":null,"ef88bb7f-0501-4974-b68e-e957c0da1b73":null}}
 2014-04-22T19:52:16.365760000 52929.176317s info: Applying data {"databases":{"ef37c13d-6772-4b09-b656-fa634851cb8f":null},"rdb_namespaces":{"08a4a7b1-46f8-4c4f-9e04-306fa44110b7":null,"6ef97ccf-fd57-4aab-b9f1-ea92060c77c3":null,"e5d56c7a-1385-44d7-af2e-c3cdc2c6b359":null}}
 2014-04-22T20:20:26.994986000 54619.492773s info: Applying data {"databases":{"b3df05d5-8750-4bc9-8d9c-477664008a72":null},"rdb_namespaces":{"6f543605-8384-4352-a020-c3480009a979":null,"d64285cf-3be3-4c70-89b9-0bb0e636d83f":null,"dd733c63-efdb-4f2e-a388-8ca0444aabe7":null}}
+2014-04-22T21:46:49.289700000 59800.828634s info: Applying data {"databases":{"new":{"name":"test"}}}
+2014-04-23T16:11:49.266157000 84181.579659s info: Server got SIGINT from pid 7369, uid 501; shutting down...
+2014-04-23T16:11:49.266437000 84181.579939s info: Shutting down client connections...
+2014-04-23T16:11:49.266819000 84181.580322s info: All client connections closed.
+2014-04-23T16:11:49.266821000 84181.580323s info: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2014-04-23T16:11:49.279401000 84181.592903s info: Storage engine shut down.
+2014-04-24T20:24:07.436119000 0.005635s info: Running rethinkdb 1.12.4 (CLANG 5.1 (clang-503.0.40))...
+2014-04-24T20:24:07.440190000 0.009706s info: Running on Darwin 13.1.0 x86_64
+2014-04-24T20:24:07.440648000 0.010164s info: Using cache size of 100 MB
+2014-04-24T20:24:07.440688000 0.010204s warn: Cache size does not leave much memory for server and query overhead (available memory: 145 MB).
+2014-04-24T20:24:07.440712000 0.010228s warn: Cache size is very low and may impact performance.
+2014-04-24T20:24:07.440731000 0.010247s info: Loading data from directory /Users/aries/Workspace/thinker/rethinkdb_data
+2014-04-24T20:24:07.454302000 0.023818s info: Listening for intracluster connections on port 29015
+2014-04-24T20:24:07.457450000 0.026966s info: Listening for client driver connections on port 28015
+2014-04-24T20:24:07.457593000 0.027109s info: Listening for administrative HTTP connections on port 8080
+2014-04-24T20:24:07.457606000 0.027122s info: Listening on addresses: 127.0.0.1, ::1
+2014-04-24T20:24:07.457606000 0.027123s info: To fully expose RethinkDB on the network, bind to all addresses
+2014-04-24T20:24:07.457616000 0.027132s info: by running rethinkdb with the `--bind all` command line option.
+2014-04-24T20:24:07.457625000 0.027141s info: Server ready
+2014-04-24T22:45:07.225089000 5282.931521s info: Server got SIGINT from pid 7098, uid 501; shutting down...
+2014-04-24T22:45:07.225356000 5282.931788s info: Shutting down client connections...
+2014-04-24T22:45:07.225600000 5282.932032s info: All client connections closed.
+2014-04-24T22:45:07.225601000 5282.932033s info: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2014-04-24T22:45:07.238202000 5282.944634s info: Storage engine shut down.
+2014-04-24T22:59:54.032873000 0.005499s info: Running rethinkdb 1.12.4 (CLANG 5.1 (clang-503.0.40))...
+2014-04-24T22:59:54.036137000 0.008763s info: Running on Darwin 13.1.0 x86_64
+2014-04-24T22:59:54.036171000 0.008796s info: Using cache size of 226 MB
+2014-04-24T22:59:54.036191000 0.008816s info: Loading data from directory /Users/aries/Workspace/thinker/rethinkdb_data
+2014-04-24T22:59:54.043591000 0.016216s info: Listening for intracluster connections on port 29015
+2014-04-24T22:59:54.044934000 0.017559s info: Listening for client driver connections on port 28015
+2014-04-24T22:59:54.045080000 0.017705s info: Listening for administrative HTTP connections on port 8080
+2014-04-24T22:59:54.045083000 0.017708s info: Listening on addresses: 127.0.0.1, ::1
+2014-04-24T22:59:54.045106000 0.017731s info: To fully expose RethinkDB on the network, bind to all addresses
+2014-04-24T22:59:54.045107000 0.017732s info: by running rethinkdb with the `--bind all` command line option.
+2014-04-24T22:59:54.045118000 0.017743s info: Server ready

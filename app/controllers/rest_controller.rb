@@ -2,15 +2,24 @@ class RestController < ApplicationController
   before_action :get_object, except: [ :index ]
 
   def index
-    render json: { collection.to_sym => get_records }
+    begin
+      render json: { collection.to_sym => get_records }
+    rescue Exception => e
+      case e.message
+      when "bad_request"
+        head :bad_request
+      else
+        head :internal_server_error
+      end
+    end
   end
 
   def update
     id = params[:id]
 
     status = begin
-      if request.put?
-        if @object
+      if @object
+        if request.put?
           get_table.replace(
             safe_params.merge(
               id: id,
@@ -18,8 +27,26 @@ class RestController < ApplicationController
               updated_at: Time.now
             ).merge(parents)
           ).run(@conn)
+
           :ok
-        else
+        elsif request.patch?
+          get_table.update(
+            safe_params.merge(
+              id: id,
+              updated_at: Time.now
+            )
+          ).run(@conn)
+
+          :ok
+        elsif request.delete?
+          get_table.get(@object["id"]).delete(
+            :durability => "hard", :return_vals => false
+          ).run(@conn)
+
+          :no_content
+        end
+      else
+        if request.put?
           get_table.insert(
             safe_params.merge(
               id: id,
@@ -27,50 +54,25 @@ class RestController < ApplicationController
               updated_at: Time.now
             ).merge(parents)
           ).run(@conn)
+
           :created
-        end
-      elsif request.patch?
-        if @object
-          get_table.update(
-            safe_params.merge(
-              id: id,
-              updated_at: Time.now
-            )
-          ).run(@conn)
-          :ok
         else
           :not_found
         end
       end
-    rescue
+    rescue Exception => e
+      puts e.message
       :internal_server_error
     end
 
-    if status == :not_found or status == :internal_server_error
-      head status
-    else
+    if status == :created or status == :ok
       get_object
       render json: { collection.to_sym => @object },
         status: status, location: some_url(id)
+    else
+      head status
     end
   end
-
-  def destroy
-    head begin
-      if @object
-        get_table.get(@object["id"]).delete(
-          :durability => "hard", :return_vals => false
-        ).run(@conn)
-        :no_content
-      else
-        :not_found
-      end
-    rescue
-      :internal_server_error
-    end
-  end
-
-
 
   protected
 
@@ -99,11 +101,8 @@ class RestController < ApplicationController
   end
 
   def select(qry)
-    if params[:ids]
-      qry.get_all(*params[:ids].split(","))
-    else
-      qry.limit(100)
-    end
+    qry = qry.get_all(*params[:ids].split(",")) if params[:ids]
+    qry
   end
 
   def parents
@@ -118,17 +117,38 @@ class RestController < ApplicationController
     [ :id ]
   end
 
+  def get_range(qry)
+    begin
+      range = request.headers[:HTTP_RANGE].split("=")[1].split("-")
+
+      qry.skip(range[0].to_i).limit(range[1].to_i - range[0].to_i)
+    rescue Exception => e
+      raise Exception.new(:bad_request)
+    end
+  end
+
   def get_records
     qry = get_table
     qry = sort(qry) if params[:sort]
 
-    filter(select(qry)).pluck(attrs).run(@conn).map do |record|
+    fields = if params[:fields]
+      params[:fields].split(",").map {|f| f.to_sym }.select do |field|
+        attrs.include? field
+      end
+    else
+      attrs
+    end
+
+    qry = filter(select(qry)).pluck(fields)
+    qry = get_range(qry) if request.headers[:HTTP_RANGE]
+
+    qry.run(@conn).map do |record|
       record.merge(href: some_url(record["id"]))
     end
   end
 
   def get_object
-    @object = get_table.filter(parents.merge({id: params[:id]})).run(@conn).first
+    @object = get_table.filter(parents.merge({id: params[:id]})).pluck(attrs).run(@conn).first
   end
 
   def some_url(id)

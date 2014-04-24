@@ -3,7 +3,7 @@ class ArticlesController < RestController
   protected
 
   def attrs
-    [ :id, :title, :body, :user_id, :created_at, :updated_at ]
+    [ :id, :title, :body, :user_id, :updated_at ]
   end
 
   def safe_params

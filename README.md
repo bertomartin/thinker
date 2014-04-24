@@ -9,14 +9,14 @@ Follows jsonapi.org standard (not fully implemented yet). Example routes:
 
 GET    /users                            users#index  
 GET    /users/:ids                       users#index  
-PATCH  /users/:id                        users#update  
 PUT    /users/:id                        users#update  
+PATCH  /users/:id                        users#update  
 DELETE /users/:id                        users#destroy
 
 GET    /users/:user_id/articles/:ids     articles#index  
 GET    /users/:user_id/articles          articles#index  
-PATCH  /users/:user_id/articles/:id      articles#update  
 PUT    /users/:user_id/articles/:id      articles#update  
+PATCH  /users/:user_id/articles/:id      articles#update  
 DELETE /users/:user_id/articles/:id      articles#destroy
 
 Can sort on fields:
@@ -24,3 +24,7 @@ Can sort on fields:
 /articles?sort=user_id,-title
 
 (Ascending on user_id, descending on title.)
+
+Can also specify fields (but only if they've been whitelisted):
+
+/articles?fields=title,body,created_at
