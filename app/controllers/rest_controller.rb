@@ -1,5 +1,7 @@
+require 'errors'
+
 class RestController < ApplicationController
-  before_action :get_object, except: [ :index ]
+  include Errors
 
   def index
     begin
@@ -15,73 +17,86 @@ class RestController < ApplicationController
   end
 
   def update
-    id = params[:id]
-
-    status = begin
-      if @object
+    begin
+      status = if @object = get_object
         if request.put?
-          get_table.replace(
-            safe_params.merge(
-              id: id,
-              created_at: Time.now,
-              updated_at: Time.now
-            ).merge(parents)
-          ).run(@conn)
-
-          :ok
+          replace_object
         elsif request.patch?
-          get_table.update(
-            safe_params.merge(
-              id: id,
-              updated_at: Time.now
-            )
-          ).run(@conn)
-
-          :ok
+          update_object
         elsif request.delete?
-          get_table.get(@object["id"]).delete(
-            :durability => "hard", :return_vals => false
-          ).run(@conn)
-
-          :no_content
+          delete_object
         end
       else
         if request.put?
-          get_table.insert(
-            safe_params.merge(
-              id: id,
-              created_at: Time.now,
-              updated_at: Time.now
-            ).merge(parents)
-          ).run(@conn)
-
-          :created
+          insert_object
         else
           :not_found
         end
       end
-    rescue Exception => e
-      puts e.message
-      :internal_server_error
-    end
 
-    if status == :created or status == :ok
-      get_object
-      render json: { collection.to_sym => @object },
-        status: status, location: some_url(id)
-    else
-      head status
+      if status == :ok or status == :created
+        render json: { collection.to_sym => get_object },
+          status: status, location: some_url(params[:id])
+      else
+        head status
+      end
+    rescue ValidationError => e
+      render json: {
+        message: e.message,
+        errors: e.errors
+      }, status: :unprocessable_entity
+    rescue Exception => e
+      render json: { message: e.message }, status: :internal_server_error
     end
   end
 
   protected
 
-  def collection
-    params[:controller]
-  end
-
   def safe_params
     {}
+  end
+
+  def insert_object
+    get_table.insert(
+      safe_params.merge(
+        id: params[:id],
+        created_at: Time.now,
+        updated_at: Time.now
+      ).merge(parents)
+    ).run(@conn)
+    :created
+  end
+
+  def update_object
+    get_table.update(
+      safe_params.merge(
+        id: params[:id],
+        updated_at: Time.now
+      )
+    ).run(@conn)
+    :ok
+  end
+
+  def replace_object
+    get_table.replace(
+      safe_params.merge(
+        id: params[:id],
+        created_at: Time.now,
+        updated_at: Time.now
+      ).merge(parents)
+    ).run(@conn)
+    :ok
+  end
+
+  def delete_object
+    get_table.get(params[:id]).delete(
+      :durability => "hard", :return_vals => false
+    ).run(@conn)
+    :no_content
+  end
+
+  def collection
+    params[:controller]
   end
 
   def get_table
@@ -148,7 +163,7 @@ class RestController < ApplicationController
   end
 
   def get_object
-    @object = get_table.filter(parents.merge({id: params[:id]})).pluck(attrs).run(@conn).first
+    get_table.filter(parents.merge({id: params[:id]})).pluck(attrs).run(@conn).first
   end
 
   def some_url(id)

@@ -7,6 +7,8 @@ class ArticlesController < RestController
   end
 
   def safe_params
-    params.require(:article).permit(:title, :body)
+    Article.validate(
+      params.require(:article).permit(:title, :body)
+    )
   end
 end
