@@ -134,12 +134,16 @@ class RestController < ApplicationController
 
   def get_range(qry)
     begin
-      range = request.headers[:HTTP_RANGE].split("=")[1].split("-")
+      rhdr = request.headers[:HTTP_RANGE].split("=")
 
-      qry.skip(range[0].to_i).limit(range[1].to_i - range[0].to_i)
+      if rhdr[0] == collection
+        qry = qry[Range.new(*rhdr[1].split("-").map(&:to_i))]
+      end
     rescue Exception => e
+      puts e.message
       raise Exception.new(:bad_request)
     end
+    qry
   end
 
   def get_records
